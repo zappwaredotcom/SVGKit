@@ -569,6 +569,13 @@ static float cachedDevicePixelsPerInch;
     if (value) {
         return [value floatValue];
     }
+
+    if( [platform hasPrefix:@"AppleTV"]) // catch-all for tvoS, AppleTV
+    {
+        // SVGKit needs "a" value and only sues it for CM/N/MM
+        // so as long a no one uses those this value doesn't matter but allows SVGs to just render
+        return 163.0f;
+    }
     
     if( [platform hasPrefix:@"iPhone"]) // catch-all for higher-end devices not yet existing
     {
